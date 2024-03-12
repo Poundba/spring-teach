@@ -103,15 +103,15 @@ export default {
   methods: {
     init() {
       this.centerDialogVisible = false
-      // axios.get('/api/user/page').then(res => {
-      //   console.log(res)
-      //   console.log(res.data.data)
-      //   this.tableData = res.data.data
-      // })
 
       console.log(this.pagination)
 
-      axios.get(`/api/user/page?current=${this.pagination.currentPage}&size=${!this.pagination.pageSize ? 10 : this.pagination.pageSize}`).then(res => {
+      axios.get('/api/user/page', {
+        params: {
+          current: this.pagination.currentPage,
+          size: this.pagination.pageSize
+        }
+      }).then(res => {
         console.log(res)
         this.tableData = res.data.data.records
         this.pagination.currentPage = res.data.data.current
